@@ -27,7 +27,7 @@ public class GreetingController {
 
     @RequestMapping("/index")
     public String index(Model model){
-        model.addAttribute("name","飞飞");
+        model.addAttribute("name","飞飞—");
         return "index";
     }
 }
