@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.domain.JsonResult;
 import hello.domain.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;
 
@@ -27,12 +29,16 @@ public class ValidController {
     @ResponseBody
     public Object get(Post post){
         logger.info(post.getContent()+":"+post.getTitle());
-        Set constraintViolations = validator.validate(post);
+         JsonResult re =  new  JsonResult() ;
+        Set<ConstraintViolation<Post>> constraintViolations = validator.validate(post);
         logger.info(constraintViolations.toString());
         if(constraintViolations.size()>0){
-            return  "错误:"+constraintViolations ;
+            for(ConstraintViolation<Post> co :constraintViolations ){
+                re.addError(co.getPropertyPath().toString(),co.getMessage());
+            }
+            return  re ;
         }else{
-            return "正确!" ;
+            return re ;
         }
     }
 }
