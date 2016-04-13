@@ -38,7 +38,7 @@ public class ValidController {
             }
             return  re ;
         }else{
-            return re ;
+            return JsonResult.success() ;
         }
     }
 }

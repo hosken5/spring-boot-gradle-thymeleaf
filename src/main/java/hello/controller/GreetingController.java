@@ -35,6 +35,7 @@ public class GreetingController {
         return "index";
     }
 
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String addNewPost(@Valid Post post, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

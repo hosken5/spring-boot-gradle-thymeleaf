@@ -1,5 +1,6 @@
 package hello.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.util.Assert;
 
 import java.util.HashSet;
@@ -8,8 +9,36 @@ import java.util.Set;
 /**
  * Created by hongpf on 16/4/11.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JsonResult {
+
+    public JsonResult(String message) {
+        this.message = message ;
+    }
+
+    public JsonResult() {
+
+    }
+
+    public  static JsonResult success(String message ){
+        JsonResult  result = new JsonResult(message) ;
+        return  result ;
+    }
+
+    public  static JsonResult success(){
+        JsonResult  result = new JsonResult() ;
+        return  result ;
+    }
+
+
+    public  static JsonResult error( String property,String message ){
+        JsonResult  result = new JsonResult(message) ;
+        result.addError(property,message);
+        return  result ;
+    }
+
     private boolean success ;
+
 
     Set errors ;
 

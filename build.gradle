@@ -18,12 +18,15 @@ jar {
 }
 repositories {
     mavenLocal()
+    maven{ url 'http://maven.oschina.net/content/groups/public/'}
     mavenCentral()
     maven { url "https://repo.spring.io/libs-release" }
 }
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework:spring-messaging")
     testCompile("junit:junit")
 }
 task wrapper(type: Wrapper) {
